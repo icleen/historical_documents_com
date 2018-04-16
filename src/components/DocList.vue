@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div v-for="item in doclist" class="item">
-      <p class="idline"><span class="user">{{item.name}}</span>
-      <span class="handle">@{{item.username}}</span>
-      <span class="time">{{item.created | since}}</span></p>
-      <p class="docs">{{item.title}}</p>
+    <div v-for="item in doclist" class="item" v-on:click="showInfo(item)">
+      <p class="docs"><b>Title:</b> {{item.title}}</p>
+      <p class="docs"><b>Type:</b> {{item.doctype}}</p>
     </div>
   </div>
 </template>
@@ -12,31 +10,36 @@
 <script>
 import moment from 'moment';
 export default {
- name: 'DocList',
- props: ['doclist'],
- filters: {
-   since: function(datetime) {
-     moment.locale('en', {
-       relativeTime: {
-         future: 'in %s',
-         past: '%s',
-         s:  'seconds',
-         ss: '%ss',
-         m:  '1m',
-         mm: '%dm',
-         h:  'h',
-         hh: '%dh',
-         d:  'd',
-         dd: '%dd',
-         M:  ' month',
-         MM: '%dM',
-         y:  'a year',
-         yy: '%dY'
-       }
-     });
-     return moment(datetime).fromNow();
-   },
- },
+  name: 'DocList',
+  props: ['doclist'],
+  filters: {
+    since: function(datetime) {
+      moment.locale('en', {
+        relativeTime: {
+          future: 'in %s',
+          past: '%s',
+          s:  'seconds',
+          ss: '%ss',
+          m:  '1m',
+          mm: '%dm',
+          h:  'h',
+          hh: '%dh',
+          d:  'd',
+          dd: '%dd',
+          M:  ' month',
+          MM: '%dM',
+          y:  'a year',
+          yy: '%dY'
+        }
+      });
+      return moment(datetime).fromNow();
+    },
+  },
+  methods: {
+    showInfo: function(item) {
+      this.$store.commit('setViewDoc',  item);
+    },
+  }
 }
 </script>
 

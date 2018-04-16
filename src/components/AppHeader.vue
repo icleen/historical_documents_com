@@ -3,10 +3,11 @@
     <ul id="menu">
       <li><img src="/static/images/animedoc.png"/></li>
       <li><router-link to="/">Home</router-link></li>
-      <li><form v-on:submit.prevent="search">
+      <!--- <li><form v-on:submit.prevent="search">
        <input v-model="keywords" placeholder="Search">
        <a href="#" v-on:click="search" class="search"><i class="fas fa-search"></i></a>
-      </form></li>
+      </form></li> --->
+      <li class="center"><a href="https://github.com/icleen/historical_documents_com">github</a></li>
       <li class="right" v-if="loggedIn"><a @click="logout" href="#">Logout</a></li>
       <li class="right" v-if="loggedIn">{{user.username}}</li>
       <li class="right" v-else>
@@ -24,88 +25,91 @@
 </template>
 
 <script>
- export default {
-   name: 'AppHeader',
-   data () {
-     return {
-       keywords: '',
-       email: '',
-       password: '',
-     }
-   },
-   computed: {
-     user: function() {
-       return this.$store.getters.user;
-     },
-     loggedIn: function() {
-       return this.$store.getters.loggedIn;
-     },
-     loginError: function() {
-       return this.$store.getters.loginError;
-     },
-   },
-   methods: {
-     login: function() {
-       this.$store.dispatch('login',{
-         email: this.email,
-         password: this.password,
-       }).then(user => {
-      	 this.email = '';
-      	 this.password = '';
-       });
-     },
-     logout: function() {
-       this.$store.dispatch('logout');
-     },
-     search: function() {
-       this.$router.push({ path: '/search', query: { keywords: this.keywords }});
-       this.keywords = '';
-     },
+export default {
+  name: 'AppHeader',
+  data () {
+   return {
+      keywords: '',
+      email: '',
+      password: '',
    }
- }
+  },
+  computed: {
+    user: function() {
+      return this.$store.getters.user;
+    },
+    loggedIn: function() {
+      return this.$store.getters.loggedIn;
+    },
+    loginError: function() {
+      return this.$store.getters.loginError;
+    },
+  },
+  methods: {
+    login: function() {
+    this.$store.dispatch('login',{
+      email: this.email,
+      password: this.password,
+    }).then(user => {
+      this.email = '';
+      this.password = '';
+    });
+    },
+    logout: function() {
+      this.$store.dispatch('logout');
+    },
+    search: function() {
+      this.$router.push({ path: '/search', query: { keywords: this.keywords }});
+      this.keywords = '';
+    },
+  }
+}
 </script>
 
 <style scoped>
- /* Strip the ul of padding and list styling */
- nav {
-     display: grid;
-     margin-bottom: 20px;
- }
- ul {
-     list-style-type:none;
-     margin:0;
-     padding:0;
- }
- /* Create a horizontal list with spacing */
- li {
-     display:inline-block;
-     float: left;
-     margin-right: 20px;
-     height: 50px;
-     text-align: center;
-     line-height: 50px;
-     color: #666;
- }
- /*Active color*/
- li a.active {
- }
- /*Hover state for top level links*/
- li:hover a {
- }
- .right {
-     float: right;
- }
- .errorPlace {
-     height: 20px;
- }
- img {
-     width: 50px;
- }
+/* Strip the ul of padding and list styling */
+nav {
+  display: grid;
+  margin-bottom: 20px;
+}
+ul {
+list-style-type:none;
+  margin:0;
+  padding:0;
+}
+/* Create a horizontal list with spacing */
+li {
+  display:inline-block;
+  float: left;
+  margin-right: 20px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #666;
+}
+/*Active color*/
+li a.active {
+}
+/*Hover state for top level links*/
+li:hover a {
+}
+.center {
+  float: right;
+}
+.right {
+  float: right;
+}
+.errorPlace {
+  height: 20px;
+}
+img {
+  width: 50px;
+}
 
- input {
-     height: 0.5em;
- }
- .search {
-     margin-left: 5px;
- }
+input {
+  height: 0.5em;
+}
+.search {
+  margin-left: 5px;
+}
 </style>

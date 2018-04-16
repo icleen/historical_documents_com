@@ -1,18 +1,24 @@
 <template>
   <div class="docs">
-    <div class="buttonWrap">
-      <button class="primary" v-on:click="upload()">Upload Document</button>
+    <div class="left">
+      <div class="buttonWrap">
+        <button class="primary" v-on:click="upload()">Upload Document</button>
+      </div>
+      <doc-list v-bind:doclist="docs"/>
     </div>
-    <doc-list v-bind:doclist="docs"/>
+    <div class="right">
+      <view-doc v-bind:isChild="true"/>
+    </div>
   </div>
 </template>
 
 <script>
 import DocList from './DocList';
+import ViewDoc from './ViewDoc';
 import moment from 'moment';
 export default {
   name: 'UserPage',
-  components: { DocList },
+  components: { DocList, ViewDoc },
   data () {
     return {
       title: '',
@@ -30,6 +36,7 @@ export default {
   },
   methods: {
     upload: function() {
+      this.$store.commit('setViewDoc',  '');
       this.$router.push({ path: '/docload'});
     },
   }
@@ -38,8 +45,19 @@ export default {
 
 <style scoped>
 .docs {
-  width: 600px;
+  display: grid;
+	grid-template-columns: 1fr 1fr;
 }
+
+.left {
+  width: 60%;
+}
+
+.right {
+  display: inline-block;
+  width: 40%;
+}
+
 .docForm {
   background: #eee;
   padding: 10px;

@@ -20,6 +20,7 @@ export default new Vuex.Store({
     loginError: '',
     registerError: '',
     docs: [],
+    viewdoc: '',
   },
   getters: {
     user: state => state.user,
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     loginError: state => state.loginError,
     registerError: state => state.registerError,
     userdocs: state => state.docs,
+    viewdoc: state => state.viewdoc,
   },
   mutations: {
     setUser (state, user) {
@@ -52,6 +54,9 @@ export default new Vuex.Store({
     },
     setDocs (state, docs) {
       state.docs = docs;
+    },
+    setViewDoc (state, doc) {
+      state.viewdoc = doc;
     },
   },
   actions: {
