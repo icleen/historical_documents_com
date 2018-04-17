@@ -1,5 +1,5 @@
 <template>
-  <div class="viewdoc">
+  <div class="viewdoc" v-show="doc !== ''">
     <img :src="getpath(doc.filepath)" />
     <p><b>Title:</b> {{doc.title}}</p>
     <p><b>Type:</b> {{doc.doctype}}</p>
@@ -32,8 +32,7 @@ export default {
   },
   methods: {
     getpath: function(filepath) {
-      let secs = filepath.split('/');
-      return '/' + secs.slice(-3).join('/');
+      return filepath;
     },
     edit: function() {
       this.$router.push({ path: '/docviewer' });

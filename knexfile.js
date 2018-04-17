@@ -31,9 +31,10 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+        unixSocket: '/var/run/mysqld/mysqld.sock',
+        user: 'iclee141',
+        db: 'histdoc',
+        charset: 'utf8'
     },
     pool: {
       min: 2,
