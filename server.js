@@ -156,7 +156,8 @@ app.post('/api/users/:id/docs', verifyToken, (req, res) => {
   // rename it to it's orignal name
   form.on('file', function(field, file) {
     fs.rename(file.path, path.join(form.uploadDir, file.name));
-    filepath = path.join(form.uploadDir, file.name);
+    // filepath = path.join(form.uploadDir, file.name);
+    filepath = path.join('/static/uploadedfiles', file.name);
   });
 
   form.on('field', function(name, value) {
